@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/13/2025 1:49:40 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-AF6LSOR"
+  DTS:CreatorName="DESKTOP-AF6LSOR\kacpe"
+  DTS:DTSID="{36A4ED1F-F3E6-4B65-A895-ECA5D0FEBDF9}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1045"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{EE158555-6FCE-4848-90E2-8B107972C515}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-AF6LSOR.JsonDocsExample]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
+      DTS:ObjectName="DESKTOP-AF6LSOR.JsonDocsExample">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-AF6LSOR;User ID=;Initial Catalog=JsonDocsExample;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}DESKTOP-AF6LSOR.JsonDocsExample;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASa/dtSBwD0+bZBUr5fz7OQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAaz7cRO7nmg6Pypvlym2K9ZOMLTkiU9HKPy4FvMtAOJwAAAAAOgAAAAAIAACAAAABMBLqEOw3Ulfu1jA4FskxGu5WSCc6kGFFlVkMZfXEUJBAAAACUiYD98jojJdsvWPmUttpbQAAAAD/4yKTfFMewU/GrB3yIQeh+2EJZP+GfuGZ79QeRwyt6+PjaYVb2GcDCVg/o0vEWn+8zEuyX6V+RdU1dUmroeB4</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="D:\kurs_tsql\json_sqlserver_etl\json_py_sql_server\json_py_sql_server\Config.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{A72C646E-F90B-4CA5-B29C-05BF2F2949DB}"
+      DTS:ObjectName="Configuration 1" />
+  </DTS:Configurations>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EC066569-6D83-4584-B8E0-314C5A6DB75D}"
+      DTS:ObjectName="ExecutePythonTask_Executable">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\Python\python.exe</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1BC9FA95-3A9E-411B-898D-246AFF84FD63}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PythonFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">open_json.py</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{70B6D985-80C2-484B-B370-62D4DCFDBDD1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PythonWorkingDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\kurs_tsql\json_sqlserver_etl</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DISABLE FOREIGN KEY"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{065F4EFA-57C0-4E59-89BF-62CB6C215A35}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="1045"
+      DTS:ObjectName="DISABLE FOREIGN KEY"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
+          SQLTask:SqlStatementSource="declare&#xA;&#x9;@c_name varchar(40),&#xA;&#x9;@schema_id varchar(20),&#xA;&#x9;@tab_name varchar(20),&#xA;&#xA;&#x9;@sql varchar(100);&#xA;begin&#xA;&#x9;select &#xA;&#x9;&#x9;@c_name = src.CONSTRAINT_NAME,&#xA;&#x9;&#x9;@schema_id = src.CONSTRAINT_SCHEMA, &#xA;&#x9;&#x9;@tab_name = aot.name&#xA;&#x9;from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS src&#xA;&#x9;inner join sys.all_objects ao on src.CONSTRAINT_NAME = ao.name&#xA;&#x9;inner join sys.all_objects aot on ao.parent_object_id = aot.object_id&#xA;&#x9;where ao.type_desc = 'FOREIGN_KEY_CONSTRAINT' and src.CONSTRAINT_SCHEMA = 'docsexample' &#xA;&#x9;and aot.name = 'documents_facts';&#xA;&#xA;&#x9;set @sql = 'ALTER TABLE ' + @schema_id + '.' + @tab_name + ' NOCHECK CONSTRAINT ' + @c_name;&#xA;&#x9;--print @sql;&#xA;&#x9;exec sp_sqlexec @sql;&#xA;end" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ENABLE FOREIGN KEY"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7DBD09C2-915E-4B5A-B49F-A489A6187366}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="1045"
+      DTS:ObjectName="ENABLE FOREIGN KEY"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
+          SQLTask:SqlStatementSource="declare&#xA;&#x9;@c_name varchar(40),&#xA;&#x9;@schema_id varchar(20),&#xA;&#x9;@tab_name varchar(20),&#xA;&#xA;&#x9;@sql varchar(100);&#xA;begin&#xA;&#x9;select &#xA;&#x9;&#x9;@c_name = src.CONSTRAINT_NAME,&#xA;&#x9;&#x9;@schema_id = src.CONSTRAINT_SCHEMA, &#xA;&#x9;&#x9;@tab_name = aot.name&#xA;&#x9;from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS src&#xA;&#x9;inner join sys.all_objects ao on src.CONSTRAINT_NAME = ao.name&#xA;&#x9;inner join sys.all_objects aot on ao.parent_object_id = aot.object_id&#xA;&#x9;where ao.type_desc = 'FOREIGN_KEY_CONSTRAINT' and src.CONSTRAINT_SCHEMA = 'docsexample' &#xA;&#x9;and aot.name = 'documents_facts';&#xA;&#xA;&#x9;set @sql = 'ALTER TABLE ' + @schema_id + '.' + @tab_name + ' WITH CHECK CHECK CONSTRAINT ' + @c_name;&#xA;&#x9;--print @sql;&#xA;&#x9;exec sp_sqlexec @sql;&#xA;end;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Python Task"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{FC276667-4C16-4C3C-9C33-7EE3128A96A7}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="1045"
+      DTS:ObjectName="Execute Python Task"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">@[User::PythonFileName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[$Package::ExecutePythonTask_Executable]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="WorkingDirectory">@[User::PythonWorkingDirectory]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="D:\Python\python.exe"
+          Arguments="open_json.py"
+          WorkingDirectory="D:\kurs_tsql\json_sqlserver_etl" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE TABLES"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D2DF7D6D-F63C-43A8-BDD7-D309774E16B9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="1045"
+      DTS:ObjectName="TRUNCATE TABLES"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE docsexample.documents_facts;&#xA;TRUNCATE TABLE docsexample.pkg_type;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2ADEE15F-31BE-4A5F-B76B-7A92577E7BB7}"
+      DTS:From="Package\DISABLE FOREIGN KEY"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\TRUNCATE TABLES" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A59F4DCF-EC0D-49E1-91C0-B27AC86E4041}"
+      DTS:From="Package\TRUNCATE TABLES"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute Python Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5F50F06D-6803-4DA9-AD12-46C99739DDA3}"
+      DTS:From="Package\Execute Python Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ENABLE FOREIGN KEY" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="203,42"
+          Id="Package\DISABLE FOREIGN KEY"
+          TopLeft="306,27" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\ENABLE FOREIGN KEY"
+          TopLeft="313,299" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Execute Python Task"
+          TopLeft="322,197" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\TRUNCATE TABLES"
+          TopLeft="315,107" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="407.25,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="410.25,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="413.25,239">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "json_py_sql_server", "json_py_sql_server\json_py_sql_server.dtproj", "{6DA88E86-8868-67B8-B41C-0E75EC677549}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DA88E86-8868-67B8-B41C-0E75EC677549}.Development|Default.ActiveCfg = Development
+		{6DA88E86-8868-67B8-B41C-0E75EC677549}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43D1AEF7-A34D-46E3-BF6A-4F9FE38F0F48}
+	EndGlobalSection
+EndGlobal
