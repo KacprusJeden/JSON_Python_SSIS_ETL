@@ -5,26 +5,39 @@ USE JsonDocsExample;
 GO
 
 
-CREATE ROLE programmer;
+CREATE ROLE programmer
+GO
 
-GRANT CREATE TABLE TO programmer;
-GRANT CREATE VIEW TO programmer;
-GRANT CREATE PROCEDURE TO programmer;
-GRANT DROP PROCEDURE TO programmer;
-GRANT CREATE FUNCTION TO programmer;
-GRANT CREATE SCHEMA TO programmer;
-GRANT CREATE TYPE TO programmer;
-GRANT CREATE ASSEMBLY TO programmer;
-GRANT CREATE SYNONYM TO programmer;
-GRANT SHOWPLAN TO programmer;
+GRANT CREATE TABLE TO programmer
+GO
+GRANT CREATE VIEW TO programmer
+GO
+GRANT CREATE PROCEDURE TO programmer
+GO
+GRANT CREATE FUNCTION TO programmer
+GO
+GRANT CREATE SCHEMA TO programmer
+GO
+GRANT CREATE TYPE TO programmer
+GO
+GRANT CREATE ASSEMBLY TO programmer
+GO
+GRANT CREATE SYNONYM TO programmer
+GO
+GRANT SHOWPLAN TO programmer
+GO
 
-GRANT SELECT, INSERT, UPDATE, DELETE, ALTER, REFERENCES ON DATABASE::[JsonDocsExample] TO programmer;
+GRANT SELECT, INSERT, UPDATE, DELETE, ALTER, REFERENCES ON DATABASE::[JsonDocsExample] TO programmer
+GO
 
-GRANT EXECUTE TO programmer;
+GRANT EXECUTE TO programmer
+GO
 
 
-CREATE ROLE analytic;
-GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON DATABASE::[JsonDocsExample] TO analytic;
+CREATE ROLE analytic
+GO
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON DATABASE::[JsonDocsExample] TO analytic
+GO
 
 
 
@@ -55,14 +68,20 @@ AFTER CREATE_TABLE
 AS
 BEGIN
     SET NOCOUNT ON;
-    DECLARE @SchemaName SYSNAME, @TableName SYSNAME;
+
+	DECLARE @SchemaName SYSNAME, @TableName SYSNAME, @SchemaOwner SYSNAME;
+
     SELECT 
         @SchemaName = EVENTDATA().value('(/EVENT_INSTANCE/SchemaName)[1]', 'SYSNAME'),
         @TableName = EVENTDATA().value('(/EVENT_INSTANCE/ObjectName)[1]', 'SYSNAME');
  
+	SELECT @SchemaOwner = dp.Name 
+	FROM sys.schemas s
+	INNER JOIN sys.database_principals dp on s.principal_id = dp.principal_id
+	WHERE s.name = @SchemaName;
 
 	DECLARE @SQL NVARCHAR(MAX);
-    SET @SQL = 'ALTER AUTHORIZATION ON OBJECT::[' + @SchemaName + '].[' + @TableName + '] TO [' + @SchemaName + '];';
+    SET @SQL = 'ALTER AUTHORIZATION ON OBJECT::[' + @SchemaName + '].[' + @TableName + '] TO [' + @SchemaOwner + '];';
     EXEC sp_executesql @SQL;
 
 	SET @SQL = 'GRANT SELECT ON [' + @SchemaName + '].[' + @TableName + '] TO programmer;';
@@ -78,30 +97,45 @@ GO
 
 -- user and schema prog
 
-CREATE LOGIN prog WITH PASSWORD = 'prog123';
-CREATE USER prog FOR LOGIN prog;
-CREATE SCHEMA prog AUTHORIZATION prog;
+CREATE LOGIN prog WITH PASSWORD = 'PrGM!!123##prgm' -- your password
+GO
+CREATE USER prog FOR LOGIN prog
+GO
+CREATE SCHEMA prog AUTHORIZATION prog
+GO
 
-ALTER USER prog WITH DEFAULT_SCHEMA = prog;
-ALTER ROLE programmer ADD MEMBER prog;
+ALTER USER prog WITH DEFAULT_SCHEMA = prog
+GO
+ALTER ROLE programmer ADD MEMBER prog
+GO
 
 
 -- user and schema pythondev
-CREATE LOGIN pythondev WITH PASSWORD = 'pythondev';
-CREATE USER pythondev FOR LOGIN pythondev;
-CREATE SCHEMA pythondev AUTHORIZATION pythondev;
+CREATE LOGIN pythondev WITH PASSWORD = 'Py!!123##tHon' -- your password
+GO
+CREATE USER pythondev FOR LOGIN pythondev
+GO
+CREATE SCHEMA pythondev AUTHORIZATION pythondev
+GO
 
-ALTER USER pythondev WITH DEFAULT_SCHEMA = pythondev;
-ALTER ROLE programmer ADD MEMBER pythondev;
+ALTER USER pythondev WITH DEFAULT_SCHEMA = pythondev
+GO
+ALTER ROLE programmer ADD MEMBER pythondev
+GO
 
 -- user and schema ssis
-drop login ssis;
-CREATE LOGIN ssis WITH PASSWORD = 'ssis';
-CREATE USER ssis FOR LOGIN ssis;
-CREATE SCHEMA ssis AUTHORIZATION ssis;
+CREATE LOGIN ssis WITH PASSWORD = '!S!!123##sis!' -- your password
+GO
+CREATE USER ssis FOR LOGIN ssis
+GO
+CREATE SCHEMA ssis AUTHORIZATION ssis
+GO
 
-ALTER USER ssis WITH DEFAULT_SCHEMA = ssis;
-ALTER ROLE programmer ADD MEMBER ssis;
+ALTER USER ssis WITH DEFAULT_SCHEMA = ssis
+GO
+ALTER ROLE programmer ADD MEMBER ssis
+GO
 
 -- schema docsexample
-CREATE SCHEMA [docsexample] AUTHORIZATION [dbo];
+CREATE SCHEMA [docsexample] AUTHORIZATION [dbo]
+GO

@@ -23,7 +23,7 @@ def insert_chunk(chunk, table_name, engine):
         print(f"Blad wstawiania do {table_name}: {e}")
 
 if __name__ == "__main__":
-    conn_url = get_connection_url(host='localhost', db='JsonDocsExample', user='prog', password='prog123')
+    conn_url = get_connection_url(host='localhost', db='JsonDocsExample', user='prog', password='PrGM!!123##prgm')
 
     try:
         engine = create_engine(conn_url, use_setinputsizes=False, echo=False)

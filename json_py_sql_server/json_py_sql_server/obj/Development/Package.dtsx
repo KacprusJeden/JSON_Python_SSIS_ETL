@@ -13,7 +13,7 @@
   DTS:ObjectName="Package"
   DTS:PackageType="5"
   DTS:VersionBuild="42"
-  DTS:VersionGUID="{EE158555-6FCE-4848-90E2-8B107972C515}">
+  DTS:VersionGUID="{2FF4F427-F030-475E-87E4-E592E5B52513}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASa/dtSBwD0+bZBUr5fz7OQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAaz7cRO7nmg6Pypvlym2K9ZOMLTkiU9HKPy4FvMtAOJwAAAAAOgAAAAAIAACAAAABMBLqEOw3Ulfu1jA4FskxGu5WSCc6kGFFlVkMZfXEUJBAAAACUiYD98jojJdsvWPmUttpbQAAAAD/4yKTfFMewU/GrB3yIQeh+2EJZP+GfuGZ79QeRwyt6+PjaYVb2GcDCVg/o0vEWn+8zEuyX6V+RdU1dUmroeB4</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAlei7JOb9dU25j7/ck6XbhgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACq/XxQqVVZFrnWiIszlkf3eNsZKs7isIE+/bUaIUCLKAAAAAAOgAAAAAIAACAAAAA6WGq9YzK5MvCKXtThnS7B5nSzXgVlTcdqxmV7fgupsRAAAAAMFP60IS+ydaYKk1LlFwNaQAAAAJafcj1s+YBqjisPZFlgHBie2zIAtiwyPaA6ZZ4IvgvHr8z7xCw0FiqAGfiMijQDySXfO47jrPn1G+Mq95Ezp7o</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -76,47 +76,47 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\DISABLE FOREIGN KEY"
+      DTS:refId="Package\ADD FOREIGN KEY"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{065F4EFA-57C0-4E59-89BF-62CB6C215A35}"
+      DTS:DTSID="{516d17f6-e379-4d8a-949c-1f87bc2a30f0}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="1045"
-      DTS:ObjectName="DISABLE FOREIGN KEY"
+      DTS:ObjectName="ADD FOREIGN KEY"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
-          SQLTask:SqlStatementSource="declare&#xA;&#x9;@c_name varchar(40),&#xA;&#x9;@schema_id varchar(20),&#xA;&#x9;@tab_name varchar(20),&#xA;&#xA;&#x9;@sql varchar(100);&#xA;begin&#xA;&#x9;select &#xA;&#x9;&#x9;@c_name = src.CONSTRAINT_NAME,&#xA;&#x9;&#x9;@schema_id = src.CONSTRAINT_SCHEMA, &#xA;&#x9;&#x9;@tab_name = aot.name&#xA;&#x9;from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS src&#xA;&#x9;inner join sys.all_objects ao on src.CONSTRAINT_NAME = ao.name&#xA;&#x9;inner join sys.all_objects aot on ao.parent_object_id = aot.object_id&#xA;&#x9;where ao.type_desc = 'FOREIGN_KEY_CONSTRAINT' and src.CONSTRAINT_SCHEMA = 'docsexample' &#xA;&#x9;and aot.name = 'documents_facts';&#xA;&#xA;&#x9;set @sql = 'ALTER TABLE ' + @schema_id + '.' + @tab_name + ' NOCHECK CONSTRAINT ' + @c_name;&#xA;&#x9;--print @sql;&#xA;&#x9;exec sp_sqlexec @sql;&#xA;end" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="ALTER TABLE docsexample.documents_facts ADD CONSTRAINT fk_pkg_type FOREIGN KEY (ID_PKG_TYPE) REFERENCES docsexample.pkg_type(ID_TYPE);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\ENABLE FOREIGN KEY"
+      DTS:refId="Package\DROP FOREIGN KEY"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{7DBD09C2-915E-4B5A-B49F-A489A6187366}"
+      DTS:DTSID="{117e1ada-0137-47f1-a520-e6256b570b66}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="1045"
-      DTS:ObjectName="ENABLE FOREIGN KEY"
+      DTS:ObjectName="DROP FOREIGN KEY"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8C8A8AC5-6C3A-4738-BA3C-F956A54CF273}"
-          SQLTask:SqlStatementSource="declare&#xA;&#x9;@c_name varchar(40),&#xA;&#x9;@schema_id varchar(20),&#xA;&#x9;@tab_name varchar(20),&#xA;&#xA;&#x9;@sql varchar(100);&#xA;begin&#xA;&#x9;select &#xA;&#x9;&#x9;@c_name = src.CONSTRAINT_NAME,&#xA;&#x9;&#x9;@schema_id = src.CONSTRAINT_SCHEMA, &#xA;&#x9;&#x9;@tab_name = aot.name&#xA;&#x9;from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS src&#xA;&#x9;inner join sys.all_objects ao on src.CONSTRAINT_NAME = ao.name&#xA;&#x9;inner join sys.all_objects aot on ao.parent_object_id = aot.object_id&#xA;&#x9;where ao.type_desc = 'FOREIGN_KEY_CONSTRAINT' and src.CONSTRAINT_SCHEMA = 'docsexample' &#xA;&#x9;and aot.name = 'documents_facts';&#xA;&#xA;&#x9;set @sql = 'ALTER TABLE ' + @schema_id + '.' + @tab_name + ' WITH CHECK CHECK CONSTRAINT ' + @c_name;&#xA;&#x9;--print @sql;&#xA;&#x9;exec sp_sqlexec @sql;&#xA;end;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="ALTER TABLE docsexample.documents_facts DROP CONSTRAINT fk_pkg_type;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute Python Task"
+      DTS:refId="Package\EXECUTE PYTHON TASK"
       DTS:CreationName="Microsoft.ExecuteProcess"
       DTS:Description="Execute Process Task"
-      DTS:DTSID="{FC276667-4C16-4C3C-9C33-7EE3128A96A7}"
+      DTS:DTSID="{b7d51c49-d01e-49ce-9dde-97ceec7dc473}"
       DTS:ExecutableType="Microsoft.ExecuteProcess"
       DTS:LocaleID="1045"
-      DTS:ObjectName="Execute Python Task"
+      DTS:ObjectName="EXECUTE PYTHON TASK"
       DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -129,6 +129,7 @@
       <DTS:ObjectData>
         <ExecuteProcessData
           Executable="D:\Python\python.exe"
+          RequireFullFileName="False"
           Arguments="open_json.py"
           WorkingDirectory="D:\kurs_tsql\json_sqlserver_etl" />
       </DTS:ObjectData>
@@ -137,7 +138,7 @@
       DTS:refId="Package\TRUNCATE TABLES"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{D2DF7D6D-F63C-43A8-BDD7-D309774E16B9}"
+      DTS:DTSID="{713c2b85-efb9-424e-829f-4e99b6587ec3}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="1045"
       DTS:ObjectName="TRUNCATE TABLES"
@@ -155,27 +156,27 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{2ADEE15F-31BE-4A5F-B76B-7A92577E7BB7}"
-      DTS:From="Package\DISABLE FOREIGN KEY"
+      DTS:DTSID="{39E07DCF-4140-493F-8652-54F67296F124}"
+      DTS:From="Package\DROP FOREIGN KEY"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\TRUNCATE TABLES" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{A59F4DCF-EC0D-49E1-91C0-B27AC86E4041}"
+      DTS:DTSID="{836A9B2D-1178-40BF-9C09-B1BA3644922C}"
       DTS:From="Package\TRUNCATE TABLES"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Execute Python Task" />
+      DTS:To="Package\EXECUTE PYTHON TASK" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{5F50F06D-6803-4DA9-AD12-46C99739DDA3}"
-      DTS:From="Package\Execute Python Task"
+      DTS:DTSID="{1819b05c-cc62-4085-a4ad-79f42566b291}"
+      DTS:From="Package\EXECUTE PYTHON TASK"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\ENABLE FOREIGN KEY" />
+      DTS:To="Package\ADD FOREIGN KEY" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -191,22 +192,22 @@
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="203,42"
-          Id="Package\DISABLE FOREIGN KEY"
+          Id="{065F4EFA-57C0-4E59-89BF-62CB6C215A35}"
           TopLeft="306,27" />
         <NodeLayout
           Size="200,42"
-          Id="Package\ENABLE FOREIGN KEY"
+          Id="{7DBD09C2-915E-4B5A-B49F-A489A6187366}"
           TopLeft="313,299" />
         <NodeLayout
           Size="183,42"
-          Id="Package\Execute Python Task"
+          Id="{FC276667-4C16-4C3C-9C33-7EE3128A96A7}"
           TopLeft="322,197" />
         <NodeLayout
           Size="184,42"
-          Id="Package\TRUNCATE TABLES"
+          Id="{D2DF7D6D-F63C-43A8-BDD7-D309774E16B9}"
           TopLeft="315,107" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
+          Id="{2ADEE15F-31BE-4A5F-B76B-7A92577E7BB7}"
           TopLeft="407.25,69">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -228,7 +229,7 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
+          Id="{A59F4DCF-EC0D-49E1-91C0-B27AC86E4041}"
           TopLeft="410.25,149">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -250,7 +251,7 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
+          Id="{5F50F06D-6803-4DA9-AD12-46C99739DDA3}"
           TopLeft="413.25,239">
           <EdgeLayout.Curve>
             <mssgle:Curve

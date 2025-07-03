@@ -7,7 +7,8 @@ CREATE TABLE docsexample.pkg_type (
 	TYPE VARCHAR(20) NOT NULL,
 	CONSTRAINT TYPE_UNQ UNIQUE (TYPE),
 	CONSTRAINT TYPE_CHK CHECK (TYPE = UPPER(TYPE))
-);
+)
+GO
 
 CREATE TABLE docsexample.documents_facts (
 	ID_ENTRY INT PRIMARY KEY,
@@ -18,5 +19,6 @@ CREATE TABLE docsexample.documents_facts (
 	EXPENSES INT DEFAULT 0,
 	CONSTRAINT docs_f_incms_chk CHECK (INCOMES >= 0),
 	CONSTRAINT docs_f_expns_chk CHECK (EXPENSES >= 0),
-	FOREIGN KEY (ID_PKG_TYPE) REFERENCES docsexample.pkg_type(ID_TYPE)
-);
+	CONSTRAINT fk_pkg_type FOREIGN KEY (ID_PKG_TYPE) REFERENCES docsexample.pkg_type(ID_TYPE)
+)
+GO
